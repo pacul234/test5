@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELEKBOYO - AI Generator (100+ Style)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        #previewContainer {
+            aspect-ratio: 9/16;
+        }
+        .style-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+        }
+        .style-option:hover {
+            background-color: #f0f9ff;
+        }
+        .style-thumbnail {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 12px;
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-2">TELEKBOYO</h1>
+            <h2 class="text-xl text-gray-600 font-medium">AI Image Generator (100+ Style)</h2>
+            <div class="w-24 h-1 bg-blue-400 mx-auto mt-4 rounded-full"></div>
+        </header>
+
+        <!-- Main Generator Card -->
+        <div class="glass-card rounded-2xl shadow-xl overflow-hidden mb-8">
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Input Section -->
+                    <div class="md:col-span-2">
+                        <!-- Search Bar -->
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="styleSearch">Cari Style</label>
+                            <input type="text" id="styleSearch" placeholder="Ketik nama style..." class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        </div>
+                        
+                        <!-- Style Selection -->
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="style">Pilih Style</label>
+                            <div class="relative">
+                                <select id="style" size="5" class="w-full h-64 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition overflow-y-auto">
+                                    <!-- Options will be loaded from styleData -->
+                                    <option value="" disabled selected>Memuat style...</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Prompt Input -->
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-medium mb-2" for="prompt">Prompt</label>
+                            <textarea id="prompt" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" placeholder="Deskripsikan gambar yang ingin Anda buat..."></textarea>
+                        </div>
+                        
+                        <!-- Size and Parameters -->
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2" for="size">Ukuran</label>
+                                <select id="size" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                                    <option value="512x512">Square (512×512)</option>
+                                    <option value="768x768">Square (768×768)</option>
+                                    <option value="512x768">Portrait (512×768)</option>
+                                    <option value="768x1024">Portrait (768×1024)</option>
+                                    <option value="1024x1024">Large (1024×1024)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-2" for="guidance">Kreativitas</label>
+                                <input type="range" id="guidance" min="1" max="20" value="7" class="w-full">
+                                <div class="text-center text-xs text-gray-600 mt-1"><span id="guidanceValue">7</span> scale</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Generate Button -->
+                        <div class="flex space-x-3">
+                            <button id="generateBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                Generate
+                            </button>
+                            <button id="randomBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Preview Section -->
+                    <div class="flex flex-col">
+                        <label class="block text-gray-700 text-sm font-medium mb-2">Preview</label>
+                        <div id="previewContainer" class="bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center border-2 border-dashed border-gray-300">
+                            <img id="previewImage" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik00IDE2TDQgMTdDNCAxOC42NTY5IDUuMzQzMTUgMjAgNyAyMEgxN0MxOC42NTY5IDIwIDIwIDE4LjY1NjkgMjAgMTdWMTZNMTIgNUMxMi43NjUyIDUgMTMuNDYxNCA1LjI5MDMyIDE0IDUuODE5NDdDMTQuNTM4NiA1LjI5MDMyIDE1LjIzNDggNSAxNiA1QzE3LjY1NjkgNSAxOSA2LjM0MzE1IDE5IDhDMTkgOS42NTY4NSAxNy42NTY5IDExIDE2IDExQzE1LjIzNDggMTEgMTQuNTM4NiAxMC43MDk3IDE0IDEwLjE4MDVDMTMuNDYxNCAxMC43MDk3IDEyLjc2NTIgMTEgMTIgMTFDMTEuMjM0OCAxMSAxMC41Mzg2IDEwLjcwOTcgMTAgMTAuMTgwNUM5LjQ2MTQzIDEwLjcwOTcgOC43NjUyMiAxMSA4IDExQzYuMzQzMTUgMTEgNSA5LjY1Njg1IDUgOEM1IDYuMzQzMTUgNi4zNDMxNSA1IDggNUM4Ljc2NTIyIDUgOS40NjE0MyA1LjI5MDMyIDEwIDUuODE5NDdDMTAuNTM4NiA1LjI5MDMyIDExLjIzNDggNSAxMiA1WiIgc3Ryb2tlPSIjZDRlOGVmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==" alt="Preview" class="w-full h-full object-cover hidden">
+                            <div id="placeholderText" class="text-gray-400 text-center p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l-1.293 1.293a1 1 0 001.414 1.414L6 17.414V20a2 2 0 002 2h3a1 1 0 001-1v-1h2v1a1 1 0 001 1h3a2 2 0 002-2v-2.586l1.293 1.293a1 1 0 001.414-1.414L20 16V8a2 2 0 00-2-2h-3a1 1 0 01-1-1V4H9v1a1 1 0 01-1 1H5a2 2 0 00-2 2v8zM9 4h6v1a1 1 0 01-1 1h-3a1 1 0 01-1-1V4z" />
+                                </svg>
+                                <p>Gambar hasil generate akan muncul di sini</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <button id="downloadBtn" disabled class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition mr-2 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                </svg>
+                                Download
+                            </button>
+                            <button id="shareBtn" disabled class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition ml-2 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                                Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div id="statusBar" class="glass-card rounded-lg px-4 py-3 text-sm text-gray-600 hidden">
+            <div class="flex items-center">
+                <svg id="statusIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span id="statusText">Siap generate gambar</span>
+                <div id="progressBar" class="ml-auto w-24 h-1 bg-gray-200 rounded-full overflow-hidden hidden">
+                    <div class="h-full bg-blue-500 rounded-full animate-pulse" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data style Anda
+        const styleData = {
+            "Parody Meme Styles": {
+                "Shrek Vaporwave": {
+                    "prompt": "Shrek in vaporwave aesthetic, neon lights, retro grid, ironic chill vibes",
+                    "guidance": 5,
+                    "ratio": "16:9",
+                    "negative": "serious, realistic, dark"
+                },
+                "SpongeBob Bootleg VHS": {
+                    "prompt": "SpongeBob bootleg VHS cover, grainy texture, cursed energy, off-brand colors",
+                    "guidance": 4,
+                    "ratio": "4:3",
+                    "negative": "HD, clear, polished"
+                },
+                // ... (masukkan semua style yang Anda miliki di sini)
+            },
+            // ... (kategori lainnya)
+        };
+
+        // DOM Elements
+        const styleSearch = document.getElementById('styleSearch');
+        const styleSelect = document.getElementById('style');
+        const promptInput = document.getElementById('prompt');
+        const sizeSelect = document.getElementById('size');
+        const guidanceInput = document.getElementById('guidance');
+        const guidanceValue = document.getElementById('guidanceValue');
+        const generateBtn = document.getElementById('generateBtn');
+        const randomBtn = document.getElementById('randomBtn');
+        const previewImage = document.getElementById('previewImage');
+        const placeholderText = document.getElementById('placeholderText');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const shareBtn = document.getElementById('shareBtn');
+        const statusBar = document.getElementById('statusBar');
+        const statusText = document.getElementById('statusText');
+        const statusIcon = document.getElementById('statusIcon');
+        const progressBar = document.getElementById('progressBar');
+
+        // Load styles into dropdown
+        function loadStyles() {
+            styleSelect.innerHTML = '';
+            
+            for (const [category, styles] of Object.entries(styleData)) {
+                // Add category label
+                const optgroup = document.createElement('optgroup');
+                optgroup.label = category;
+                
+                // Add styles for this category
+                for (const [styleName, params] of Object.entries(styles)) {
+                    const option = document.createElement('option');
+                    option.value = styleName;
+                    option.textContent = styleName;
+                    option.dataset.prompt = params.prompt;
+                    option.dataset.guidance = params.guidance;
+                    option.dataset.ratio = params.ratio;
+                    option.dataset.negative = params.negative;
+                    optgroup.appendChild(option);
+                }
+                
+                styleSelect.appendChild(optgroup);
+            }
+            
+            // Select first style by default
+            if (styleSelect.options.length > 0) {
+                styleSelect.options[0].selected = true;
+                updateStyleParams();
+            }
+        }
+
+        // Update parameters when style changes
+        function updateStyleParams() {
+            const selectedOption = styleSelect.options[styleSelect.selectedIndex];
+            if (selectedOption && selectedOption.dataset) {
+                guidanceInput.value = selectedOption.dataset.guidance || 7;
+                guidanceValue.textContent = guidanceInput.value;
+                
+                // Update size options based on recommended ratio
+                const recommendedRatio = selectedOption.dataset.ratio;
+                if (recommendedRatio) {
+                    const ratioMap = {
+                        "16:9": "768x432",
+                        "4:3": "768x576",
+                        "3:2": "768x512",
+                        "2:3": "512x768",
+                        "9:16": "432x768",
+                        "1:1": "768x768"
+                    };
+                    
+                    if (ratioMap[recommendedRatio]) {
+                        sizeSelect.value = ratioMap[recommendedRatio];
+                    }
+                }
+            }
+        }
+
+        // Search functionality
+        styleSearch.addEventListener('input', () => {
+            const searchTerm = styleSearch.value.toLowerCase();
+            const options = styleSelect.getElementsByTagName('option');
+            
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                const text = option.text.toLowerCase();
+                option.style.display = text.includes(searchTerm) ? '' : 'none';
+            }
+        });
+
+        // Random style button
+        randomBtn.addEventListener('click', () => {
+            const options = styleSelect.getElementsByTagName('option');
+            const visibleOptions = Array.from(options).filter(opt => opt.style.display !== 'none');
+            
+            if (visibleOptions.length > 0) {
+                const randomIndex = Math.floor(Math.random() * visibleOptions.length);
+                visibleOptions[randomIndex].selected = true;
+                updateStyleParams();
+                showStatus(`Style acak: ${visibleOptions[randomIndex].text}`, 'success');
+                
+                // Animation
+                randomBtn.classList.add('animate-spin');
+                setTimeout(() => randomBtn.classList.remove('animate-spin'), 1000);
+            }
+        });
+
+        // Generate image
+        generateBtn.addEventListener('click', async () => {
+            const prompt = promptInput.value.trim();
+            if (!prompt) {
+                showStatus('Masukkan prompt terlebih dahulu', 'error');
+                return;
+            }
+
+            const selectedOption = styleSelect.options[styleSelect.selectedIndex];
+            const styleName = selectedOption.value;
+            const stylePrompt = selectedOption.dataset.prompt;
+            const negativePrompt = selectedOption.dataset.negative;
+            const size = sizeSelect.value;
+            const guidance = guidanceInput.value;
+            
+            // Combine user prompt with style prompt
+            const fullPrompt = `${prompt}, ${stylePrompt}`;
+            
+            showStatus('Membuat gambar...', 'loading');
+            generateBtn.disabled = true;
+            progressBar.classList.remove('hidden');
+            
+            try {
+                const [width, height] = size.split('x').map(Number);
+                
+                // Using pollinations.ai API
+                const apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${width}&height=${height}&guidance=${guidance}&negativePrompt=${encodeURIComponent(negativePrompt)}&nologo=true`;
+                
+                // Create a new image to check if it loads successfully
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                img.src = apiUrl;
+                
+                img.onload = () => {
+                    // Success - display the image
+                    previewImage.src = apiUrl;
+                    previewImage.classList.remove('hidden');
+                    placeholderText.classList.add('hidden');
+                    downloadBtn.disabled = false;
+                    shareBtn.disabled = false;
+                    
+                    showStatus('Gambar berhasil dibuat!', 'success');
+                    generateBtn.disabled = false;
+                    progressBar.classList.add('hidden');
+                    
+                    // Set download functionality
+                    downloadBtn.onclick = () => {
+                        const link = document.createElement('a');
+                        link.href = apiUrl;
+                        link.download = `telekboyo-${styleName.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}.jpg`;
+                        link.click();
+                    };
+                };
+                
+                img.onerror = () => {
+                    throw new Error('Gagal membuat gambar');
+                };
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus('Gagal membuat gambar', 'error');
+                generateBtn.disabled = false;
+                progressBar.classList.add('hidden');
+            }
+        });
+
+        // Status display
+        function showStatus(message, type) {
+ 
