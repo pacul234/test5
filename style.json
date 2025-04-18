@@ -1,0 +1,520 @@
+{
+  "Parody Meme Styles": {
+    "Shrek Vaporwave": {
+      "prompt": "Shrek in vaporwave aesthetic, neon lights, retro grid, ironic chill vibes",
+      "guidance": 5,
+      "ratio": "16:9",
+      "negative": "serious, realistic, dark"
+    },
+    "SpongeBob Bootleg VHS": {
+      "prompt": "SpongeBob bootleg VHS cover, grainy texture, cursed energy, off-brand colors",
+      "guidance": 4,
+      "ratio": "4:3",
+      "negative": "HD, clear, polished"
+    },
+    "Gru Propaganda Poster": {
+      "prompt": "Despicable Me's Gru in Soviet propaganda poster style, bold red tones, retro socialist realism",
+      "guidance": 6,
+      "ratio": "3:2",
+      "negative": "modern, cute, pastel"
+    },
+    "Sans Undertale Graffiti": {
+      "prompt": "Sans from Undertale in urban graffiti style, edgy outlines, meme energy, street vibes",
+      "guidance": 5,
+      "ratio": "2:3",
+      "negative": "clean, polished"
+    },
+    "Cursed Emoji Apocalypse": {
+      "prompt": "cursed emojis in apocalyptic setting, distorted expressions, surreal horror humor",
+      "guidance": 7,
+      "ratio": "9:16",
+      "negative": "normal emojis, clean art"
+    },
+    "Nyan Cat Hieroglyph": {
+      "prompt": "Nyan Cat depicted as ancient Egyptian hieroglyph, surreal, pixel-texture sandstone",
+      "guidance": 4,
+      "ratio": "4:3",
+      "negative": "modern, realistic"
+    },
+    "NPC Wojak Mosaic": {
+      "prompt": "NPC Wojak face made of classical Roman mosaic tiles, ironic glitchy feel",
+      "guidance": 6,
+      "ratio": "1:1",
+      "negative": "modern, smooth"
+    },
+    "Doge Oil Painting": {
+      "prompt": "Doge meme as classical oil painting, regal pose, baroque lighting, ironic tone",
+      "guidance": 5,
+      "ratio": "3:4",
+      "negative": "cartoon, digital art"
+    },
+    "Pepe Graffiti Wall": {
+      "prompt": "Pepe the Frog graffiti mural, urban decay, street style chaos, edgy irony",
+      "guidance": 6,
+      "ratio": "16:9",
+      "negative": "soft, refined, corporate"
+    },
+    "GigaChad Mosaic Cathedral": {
+      "prompt": "GigaChad face as stained glass cathedral art, over-the-top glory, divine lighting",
+      "guidance": 7,
+      "ratio": "9:16",
+      "negative": "subtle, dull, realistic"
+    },
+    "Minion Renaissance Fresco": {
+      "prompt": "Minions as Renaissance fresco painting, cracked wall texture, divine light, absurd holiness",
+      "guidance": 6,
+      "ratio": "4:3",
+      "negative": "modern, detailed, digital"
+    },
+    "AI Meme Overload": {
+      "prompt": "AI-generated meme chaos, random meme elements mashed together, surreal and glitched, ironic humor",
+      "guidance": 8,
+      "ratio": "1:1",
+      "negative": "coherent, normal, safe"
+    },
+    "Lo-Fi Big Chungus": {
+      "prompt": "Big Chungus in lo-fi anime aesthetic, chill bedroom vibes, vaporwave colors, ironic coziness",
+      "guidance": 5,
+      "ratio": "16:9",
+      "negative": "realistic, detailed, sharp"
+    },
+    "Boomer Clipart Hell": {
+      "prompt": "explosion of boomer-style clipart, word art text, overused emojis, Comic Sans chaos",
+      "guidance": 7,
+      "ratio": "4:3",
+      "negative": "aesthetic, minimal, modern"
+    },
+    "AI Trend Fail Poster": {
+      "prompt": "AI-generated fake trend poster, exaggerated features, poor design, ironic self-awareness",
+      "guidance": 6,
+      "ratio": "9:16",
+      "negative": "professional, real brand, good design"
+    }
+  },
+  "Graffiti Collage": {
+    "prompt": "chaotic street graffiti layers, vibrant spray paint, urban textures, mixed tags and stencil work, raw and edgy look",
+    "guidance": 7.5,
+    "ratio": "1:1",
+    "negative": "clean, minimalist, smooth, orderly composition"
+  },
+  "Retro Ad Mashup": {
+    "prompt": "collage of 1950s retro advertisements, pop colors, bold text overlays, comic style illustrations, kitsch aesthetic",
+    "guidance": 8,
+    "ratio": "3:4",
+    "negative": "modern design, realism, muted tones"
+  },
+  "Angsty Sketchbook": {
+    "prompt": "moody black ink sketches, messy notebook pages, teenage angst, emotional rawness, edgy expressions",
+    "guidance": 6.5,
+    "ratio": "4:5",
+    "negative": "clean lines, polished art, digital rendering"
+  },
+  "Cursed Children's Book": {
+    "prompt": "illustration from a haunted children’s book, uncanny characters, vintage colors, creepy innocence",
+    "guidance": 7,
+    "ratio": "3:4",
+    "negative": "cute, safe, normal children's art"
+  },
+  "Glitched Oil Painting": {
+    "prompt": "classic oil painting corrupted by digital glitch, distorted textures, pixelated brushstrokes, eerie beauty",
+    "guidance": 8.5,
+    "ratio": "4:3",
+    "negative": "perfect realism, stable structure, clean shapes"
+  },
+  "Brutalist Crayon": {
+    "prompt": "brutalist architecture drawn with wax crayon, rough surfaces, primitive lines, abstract interpretation",
+    "guidance": 6,
+    "ratio": "1:1",
+    "negative": "soft, colorful, detailed realism"
+  },
+  "Scribblecore": {
+    "prompt": "dense chaotic scribbles, overlapping lines, raw emotion, impulsive sketching, notebook energy",
+    "guidance": 6.9,
+    "ratio": "1:1",
+    "negative": "clean, refined, symmetrical, calm layout"
+  },
+  "Dreamlike Felt Art": {
+    "prompt": "felt texture art with surreal dreamlike characters, soft and fuzzy, pastel colors, hand-crafted look",
+    "guidance": 7.5,
+    "ratio": "5:4",
+    "negative": "sharp, digital, metallic, cold"
+  },
+  "Haunted Toy Concept": {
+    "prompt": "creepy toy design, twisted features, stitched smiles, uncanny valley, horror-themed toy art",
+    "guidance": 7.2,
+    "ratio": "4:5",
+    "negative": "cute, safe, traditional toys"
+  },
+  "Post-Apocalyptic Crayon": {
+    "prompt": "child-like crayon drawing of a post-apocalyptic world, burning cities, sad stick figures, mutated animals",
+    "guidance": 7.8,
+    "ratio": "16:9",
+    "negative": "happy, colorful, clean landscapes"
+  },
+  "Y2K Glitch Poster": {
+    "prompt": "Y2K aesthetics, glitch effects, chrome text, neon overlays, VHS distortion, millennium visuals",
+    "guidance": 8.2,
+    "ratio": "3:4",
+    "negative": "organic, natural, vintage"
+  },
+  "Melting Neon Sculpture": {
+    "prompt": "dripping neon plastic sculptures, surreal forms, bright glow, liquid-like material, gallery setup",
+    "guidance": 8.7,
+    "ratio": "3:4",
+    "negative": "rigid shapes, muted colors, traditional sculpture"
+  },
+  "Notebook Margin Doodles": {
+    "prompt": "random pen doodles in a school notebook margin, abstract creatures, weird expressions, spontaneous lines",
+    "guidance": 6.3,
+    "ratio": "4:5",
+    "negative": "full-page drawings, planned composition"
+  },
+  "Ink Monster Sketch": {
+    "prompt": "black ink monster design, expressive inky brushstrokes, abstract creature, horror vibes",
+    "guidance": 7,
+    "ratio": "1:1",
+    "negative": "colorful, soft, non-threatening"
+  },
+  "Garbage Collage": {
+    "prompt": "art made from torn packaging, receipts, junk food wrappers, chaotic and colorful trash art",
+    "guidance": 7.9,
+    "ratio": "4:3",
+    "negative": "clean, neat, traditional materials"
+  },
+  "AI Paint Over": {
+    "prompt": "hand drawing with visible AI paint-over artifacts, weird textures, wrong proportions, uncanny effect",
+    "guidance": 7.4,
+    "ratio": "5:4",
+    "negative": "human-made perfect illustration"
+  },
+  "Mutant Graffiti Kids": {
+    "prompt": "childlike graffiti depicting mutant creatures, neon spray paint, chaotic walls, playful horror",
+    "guidance": 8.1,
+    "ratio": "3:4",
+    "negative": "boring, realistic, colorless"
+  },
+  "Concept Art From a Fever Dream": {
+    "prompt": "fever dream concept art, surreal architecture, floating limbs, vaporous colors, dream logic",
+    "guidance": 8.5,
+    "ratio": "16:9",
+    "negative": "coherent, realistic environments"
+  },
+  "Psychedelic Paper Cut": {
+    "prompt": "colorful paper cut shapes arranged in psychedelic patterns, swirling compositions, 70s inspiration",
+    "guidance": 7.8,
+    "ratio": "1:1",
+    "negative": "flat, monochrome, plain"
+  },
+  "AI Sketch Fail": {
+    "prompt": "AI-generated sketch with bad anatomy, weird faces, overlapping limbs, uncanny failure aesthetic",
+    "guidance": 7,
+    "ratio": "3:4",
+    "negative": "perfect human anatomy, professional concept art"
+  },
+  "Graffiti Stickerbook": {
+    "prompt": "urban sticker book style with graffiti tags, cartoon characters, random icons, layered on walls",
+    "guidance": 7.5,
+    "ratio": "4:5",
+    "negative": "clean, white background, minimalist"
+  },
+  "Crayon Galaxy": {
+    "prompt": "outer space scene drawn with crayons, colorful planets, childish rocket ships, vibrant stars",
+    "guidance": 6.8,
+    "ratio": "16:9",
+    "negative": "scientific accuracy, dark, realistic textures"
+  },
+  "Trashcore": {
+    "prompt": "grungy, low-effort art with deliberate trash aesthetics, scuffed textures, random elements, edgy mood",
+    "guidance": 6.9,
+    "ratio": "1:1",
+    "negative": "polished, luxurious, professional"
+  },
+  "Comic Strip Madness": {
+    "prompt": "chaotic comic strip panels, over-exaggerated characters, glitch panels, out-of-order narrative",
+    "guidance": 7.4,
+    "ratio": "4:5",
+    "negative": "coherent paneling, clean storytelling"
+  },
+  "Marker On Cardboard": {
+    "prompt": "illustration drawn with markers on a piece of cardboard, rough surface, bold strokes, limited palette",
+    "guidance": 6.5,
+    "ratio": "3:4",
+    "negative": "smooth paper, digital, refined lines"
+  },
+  "Galactic Wizardry": {
+    "prompt": "celestial sorcerer casting spells in space, glowing magic runes, cosmic energy, stars and galaxies",
+    "guidance": 7,
+    "ratio": "1:1",
+    "negative": "low-res, blurry, extra limbs"
+  },
+  "Haunted Polaroid": {
+    "prompt": "ghostly figure captured in a vintage polaroid, faded film grain, eerie atmosphere, flash photo effect",
+    "guidance": 6,
+    "ratio": "4:5",
+    "negative": "clean, polished, modern look"
+  },
+  "Dreamcast Loading Screen": {
+    "prompt": "surreal graphics like early 2000s Dreamcast intro, rotating low-poly 3D shapes, vapor trail, spinning logo",
+    "guidance": 8,
+    "ratio": "16:9",
+    "negative": "high realism, HD texture"
+  },
+  "Renaissance Fantasy": {
+    "prompt": "epic fantasy scene in Renaissance painting style, knights, dragons, oil on canvas texture",
+    "guidance": 9,
+    "ratio": "3:4",
+    "negative": "cartoonish, modern lighting"
+  },
+  "TikTok Makeup Filter": {
+    "prompt": "portrait with exaggerated makeup, shiny blush, filter sparkles, smooth skin, soft lighting",
+    "guidance": 6,
+    "ratio": "9:16",
+    "negative": "realistic skin texture, blemishes"
+  },
+  "Alien Graffiti": {
+    "prompt": "street art made by aliens, glowing symbols, cosmic spray paint, neon drips, extraterrestrial tagging",
+    "guidance": 8,
+    "ratio": "1:1",
+    "negative": "ordinary graffiti, human letters"
+  },
+  "Neo-Baroque Fantasy": {
+    "prompt": "fantasy characters in ornate Neo-Baroque setting, luxurious details, dramatic lighting, golden hues",
+    "guidance": 9,
+    "ratio": "4:5",
+    "negative": "minimalist, modern"
+  },
+  "PlayStation 1 Cutscene": {
+    "prompt": "low-res 3D cutscene from PS1 era, pixelated textures, moody lighting, jagged models",
+    "guidance": 6,
+    "ratio": "4:3",
+    "negative": "modern shaders, high poly models"
+  },
+  "Digital Tarot Glitch": {
+    "prompt": "AI-generated tarot card with corrupted pixels, glitch symbols, cyber arcana",
+    "guidance": 8,
+    "ratio": "2:3",
+    "negative": "clean layout, traditional deck"
+  },
+  "Mythpunk Propaganda Poster": {
+    "prompt": "bold propaganda poster with fantasy mythology, ancient runes, mythical warriors, strong colors",
+    "guidance": 7,
+    "ratio": "3:4",
+    "negative": "realistic photography"
+  },
+  "Ghibli Space Opera": {
+    "prompt": "anime space opera in Studio Ghibli style, warm colors, hand-drawn spaceships, emotional faces",
+    "guidance": 8,
+    "ratio": "16:9",
+    "negative": "dark, gritty sci-fi"
+  },
+  "Demonic Oil Painting": {
+    "prompt": "classical oil painting of a demonic figure, thick brush strokes, shadows, surreal proportions",
+    "guidance": 9,
+    "ratio": "3:4",
+    "negative": "digital, cartoony"
+  },
+  "Utopian Tech Future": {
+    "prompt": "clean futuristic city, utopia, glowing buildings, advanced tech, harmony between nature and AI",
+    "guidance": 7,
+    "ratio": "16:9",
+    "negative": "dystopian, chaotic"
+  },
+  "Shroomcore Fantasy": {
+    "prompt": "fantasy world filled with glowing mushrooms, bioluminescent forest, magical fog, soft fantasy lighting",
+    "guidance": 7,
+    "ratio": "4:5",
+    "negative": "urban, dull colors"
+  },
+  "AI Fused Collage": {
+    "prompt": "bizarre AI-made collage of mismatched objects, uncanny symmetry, dreamlike chaos",
+    "guidance": 9,
+    "ratio": "1:1",
+    "negative": "clean, realistic scenes"
+  },
+  "Noir Cyberdetective": {
+    "prompt": "cyberpunk noir detective in rain-soaked city, trench coat, neon lights, moody shadows",
+    "guidance": 8,
+    "ratio": "21:9",
+    "negative": "bright daylight, fantasy"
+  },
+  "Neo Ukiyo-e Space Battle": {
+    "prompt": "traditional Japanese ukiyo-e style with space battle, samurai astronauts, stylized waves",
+    "guidance": 9,
+    "ratio": "3:4",
+    "negative": "realistic shading, 3D"
+  },
+  "Pixel Arcade Dungeon": {
+    "prompt": "retro pixel art dungeon scene, glowing monsters, 16-bit aesthetic, top-down game vibe",
+    "guidance": 6,
+    "ratio": "4:3",
+    "negative": "realistic texture"
+  },
+  "Tumblr Collage Aesthetic": {
+    "prompt": "aesthetic photo collage with torn photos, dreamy overlays, handwritten quotes, soft pink tones",
+    "guidance": 6,
+    "ratio": "3:4",
+    "negative": "sharp layout, realism"
+  },
+  "Glitched Renaissance": {
+    "prompt": "renaissance painting corrupted by digital glitch, distorted textures, broken brushwork",
+    "guidance": 9,
+    "ratio": "1:1",
+    "negative": "clean classic style"
+  },
+  "Witchpunk Alley": {
+    "prompt": "urban alley filled with witchy graffiti, magical sigils glowing on walls, steam and fog",
+    "guidance": 8,
+    "ratio": "9:16",
+    "negative": "modern clean city"
+  },
+  "Fantasy CRT Adventure": {
+    "prompt": "fantasy RPG game running on CRT TV, scanlines, low color depth, nostalgic UI",
+    "guidance": 7,
+    "ratio": "4:3",
+    "negative": "HD graphics, 4K resolution"
+  },
+  "Grimdark Angelic Visions": {
+    "prompt": "epic dark painting of angelic battle, wings, glowing eyes, apocalyptic sky, painterly",
+    "guidance": 9,
+    "ratio": "3:4",
+    "negative": "bright happy scene"
+  },
+  "Mosaic Space Cathedral": {
+    "prompt": "futuristic cathedral made of colorful stained glass mosaics, floating in deep space",
+    "guidance": 8,
+    "ratio": "3:4",
+    "negative": "dark color palette, flat walls"
+  },
+  "AI Coloring Book Fail": {
+    "prompt": "coloring book style image filled incorrectly by AI, weird color choices, coloring outside the lines",
+    "guidance": 7,
+    "ratio": "1:1",
+    "negative": "perfect coloring"
+  },
+  "VHS Demon Tape": {
+    "prompt": "cursed VHS tape playback, demonic face, VHS static, grainy footage, red glow",
+    "guidance": 8,
+    "ratio": "4:3",
+    "negative": "clean image, high resolution"
+  },
+  "Arcade Machine Fantasy": {
+    "prompt": "fantasy world inside an arcade machine, glowing buttons, pixel monsters, CRT glow",
+    "guidance": 7,
+    "ratio": "16:9",
+    "negative": "realistic textures, no CRT"
+  },
+  "Holographic Witchcore": {
+    "prompt": "holographic witch aesthetic, neon potions, glowing runes, pastel blacklight",
+    "guidance": 9,
+    "ratio": "3:4",
+    "negative": "earth tones, vintage"
+  },
+  "Sci-Fi Egyptian Tomb": {
+    "prompt": "ancient Egyptian tomb with futuristic tech, glowing hieroglyphs, alien sarcophagus",
+    "guidance": 8,
+    "ratio": "3:4",
+    "negative": "traditional Egypt, no tech"
+  },
+  "AI Graffiti Overload": {
+    "prompt": "chaotic layers of AI-generated graffiti, overlapping texts, strange symbols, neon spray",
+    "guidance": 9,
+    "ratio": "1:1",
+    "negative": "clean layout, simple tags"
+  },
+  "Medieval Cyber Banner": {
+    "prompt": "medieval knight with cyberpunk gear, neon cape, digital heraldry, glowing sword",
+    "guidance": 7,
+    "ratio": "9:16",
+    "negative": "historical accuracy, dull colors"
+  },
+  "Alien Fashion Zine": {
+    "prompt": "bizarre fashion zine from another planet, alien models, weird clothes, shiny magazine layout",
+    "guidance": 7,
+    "ratio": "3:4",
+    "negative": "earth fashion, realism"
+  },
+  "Retro 90s Horror Game": {
+    "prompt": "low-poly horror game from the 90s, VHS filter, polygonal characters, bloody interface",
+    "guidance": 8,
+    "ratio": "4:3",
+    "negative": "modern graphics, smooth textures"
+  },
+  "Celestial Tea Party": {
+    "prompt": "whimsical tea party in the stars, floating table, cosmic pastries, galaxy background",
+    "guidance": 6,
+    "ratio": "4:5",
+    "negative": "gothic, industrial"
+  },
+  "Social Media Cult Poster": {
+    "prompt": "dark satire poster mocking influencer culture, distorted emojis, bold red warning text",
+    "guidance": 8,
+    "ratio": "1:1",
+    "negative": "positive vibes, beauty filters"
+  },
+  "Dystopian Origami": {
+    "prompt": "origami art in a dystopian setting, paper cranes over ruined city, ash and folds",
+    "guidance": 9,
+    "ratio": "3:4",
+    "negative": "clean city, plastic textures"
+  },
+  "Neon Angelcore": {
+    "prompt": "angelic characters with neon halos, glowing wings, dreamy lighting, soft cyber heaven",
+    "guidance": 7,
+    "ratio": "3:4",
+    "negative": "dark gothic, muted colors"
+  },
+  "Abstract Cat Cult": {
+    "prompt": "surreal cult worshipping abstract cat god, glowing eyes, weird symbols, dreamlike chaos",
+    "guidance": 9,
+    "ratio": "1:1",
+    "negative": "realistic anatomy, normal people"
+  },
+  "Flat Earth Fantasy Map": {
+    "prompt": "hand-drawn fantasy map on a flat earth, sea monsters, cosmic borders, glowing edge",
+    "guidance": 6,
+    "ratio": "16:9",
+    "negative": "3D globe, modern map"
+  },
+  "Cyber Jungle": {
+    "prompt": "jungle made of wires and neon plants, electronic vines, glowing fauna",
+    "guidance": 8,
+    "ratio": "4:5",
+    "negative": "natural foliage"
+  },
+  "Melting Anime Portrait": {
+    "prompt": "anime character portrait melting like wax, distorted expressions, dripping color",
+    "guidance": 9,
+    "ratio": "1:1",
+    "negative": "clean anime art"
+  },
+  "Internet Horror Ritual": {
+    "prompt": "digital ritual scene, haunted websites, cursed avatars, demonic html code",
+    "guidance": 9,
+    "ratio": "3:4",
+    "negative": "safe internet aesthetics"
+  },
+  "Lo-fi Spirit Realm": {
+    "prompt": "peaceful spirit world in lo-fi anime style, floating lights, dream haze, chill ambiance",
+    "guidance": 6,
+    "ratio": "16:9",
+    "negative": "high tension, sharp focus"
+  },
+  "Blood Pixel Shrine": {
+    "prompt": "ancient shrine rendered in pixel art, dripping red pixels, retro horror aesthetic",
+    "guidance": 7,
+    "ratio": "4:3",
+    "negative": "3D art, realistic textures"
+  },
+  "Glitchcore Tarot Vision": {
+    "prompt": "tarot vision sequence full of glitches, overlapping realities, broken symbols",
+    "guidance": 8,
+    "ratio": "2:3",
+    "negative": "clean lines, flat design"
+  },
+  "Kitsch Fairy Apocalypse": {
+    "prompt": "end of the world in kitschy fairy tale style, pastel destruction, ironic tragedy",
+    "guidance": 7,
+    "ratio": "16:9",
+    "negative": "serious apocalypse art"
+  }
+  }
