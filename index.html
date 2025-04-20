@@ -1,180 +1,381 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vintage Poster Generator</title>
-    <style>
-        body {
-            font-family: 'Courier New', monospace;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f0;
-            color: #333;
-        }
-        h1 {
-            color: #8b4513;
-            text-align: center;
-            border-bottom: 2px dashed #8b4513;
-            padding-bottom: 10px;
-        }
-        .controls {
-            background-color: #fff8e7;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #fffff8;
-        }
-        button {
-            background-color: #8b4513;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #a0522d;
-        }
-        #poster-result {
-            width: 100%;
-            border: 10px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            margin-top: 20px;
-        }
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .loading-spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #8b4513;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TELEKBOYO - Ultimate Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .watermark {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      opacity: 0.7;
+    }
+    .pose-thumb {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  </style>
 </head>
-<body>
-    <h1>🎸 Vintage Poster Generator</h1>
-    
-    <div class="controls">
-        <label for="poster-title">Poster Title:</label>
-        <input type="text" id="poster-title" placeholder="e.g. Summer Festival 2024">
-        
-        <label for="poster-theme">Theme:</label>
-        <select id="poster-theme">
-            <option value="rock">Rock Concert</option>
-            <option value="jazz">Jazz Night</option>
-            <option value="movie">Vintage Movie</option>
-            <option value="circus">Old Circus</option>
-        </select>
-        
-        <label for="poster-style">Aging Effect:</label>
-        <select id="poster-style">
-            <option value="torn">Torn Edges</option>
-            <option value="stained">Tea Stained</option>
-            <option value="grainy">Film Grain</option>
-            <option value="wrinkled">Wrinkled Paper</option>
-        </select>
-        
-        <label for="poster-colors">Color Palette:</label>
-        <select id="poster-colors">
-            <option value="red">Red & Cream</option>
-            <option value="blue">Blue & Yellow</option>
-            <option value="sepia">Sepia Tones</option>
-            <option value="bw">Black & White</option>
-        </select>
-        
-        <label for="poster-year">Vintage Year:</label>
-        <input type="number" id="poster-year" min="1900" max="1999" value="1975">
-        
-        <button onclick="generatePoster()">Generate Vintage Poster</button>
-    </div>
-    
-    <div class="loading" id="loading">
-        <div class="loading-spinner"></div>
-        <p>Creating your vintage masterpiece...</p>
-    </div>
-    
-    <img id="poster-result" style="display: none;">
+<body class="bg-gray-900 text-white">
+  <!-- HEADER -->
+  <header class="bg-black py-4 text-center border-b border-gray-800">
+    <h1 class="text-3xl font-bold">🎨 TELEKBOYO ULTIMATE</h1>
+    <p class="text-gray-400">AI Portrait Generator</p>
+  </header>
 
-    <script>
-        function generatePoster() {
-            // Show loading
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('poster-result').style.display = 'none';
-            
-            // Get user inputs
-            const title = document.getElementById('poster-title').value || "Mystery Event";
-            const theme = document.getElementById('poster-theme').value;
-            const style = document.getElementById('poster-style').value;
-            const colors = document.getElementById('poster-colors').value;
-            const year = document.getElementById('poster-year').value;
-            
-            // Theme descriptions
-            const themes = {
-                rock: `Rock concert poster for "${title}", psychedelic typography`,
-                jazz: `Jazz club poster for "${title}", art deco style`,
-                movie: `Vintage movie poster for "${title}", cinematic style`,
-                circus: `Old circus poster for "${title}", big top advertisement`
-            };
-            
-            // Style effects
-            const styles = {
-                torn: "with torn edges and visible tape marks",
-                stained: "with tea stains and yellowed paper texture",
-                grainy: "with heavy film grain and light leaks",
-                wrinkled: "on crumpled paper with deep creases"
-            };
-            
-            // Color palettes
-            const colorPalettes = {
-                red: "red and cream Pantone colors",
-                blue: "blue and yellow offset printing colors",
-                sepia: "sepia tones with faded browns",
-                bw: "black and white with high contrast"
-            };
-            
-            // Build the prompt
-            const prompt = `${themes[theme]}, ${styles[style]}, ${colorPalettes[colors]}, 
-            ${year}s design, offset printing misalignment, vintage poster`;
-            
-            // Generate image URL
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?model=flux-core&width=900&steps=50&guidance_scale=7&seed=${Math.floor(Math.random()*10000)}&nologo=true`;
-            
-            // Display result
-            const resultImg = document.getElementById('poster-result');
-            resultImg.onload = function() {
-                document.getElementById('loading').style.display = 'none';
-                resultImg.style.display = 'block';
-            };
-            resultImg.src = url;
+  <div class="max-w-4xl mx-auto p-4">
+    <!-- PROMPT INPUT -->
+    <div class="mb-6">
+      <textarea 
+        id="prompt-input" 
+        placeholder="Describe your image (e.g. 'portrait of a warrior in the forest')" 
+        class="w-full p-4 bg-gray-800 rounded-lg border border-gray-700 h-24 focus:border-blue-500"
+      ></textarea>
+    </div>
+
+    <!-- POSE GENERATOR -->
+    <div class="mb-6 bg-gray-800 p-4 rounded-lg">
+      <h2 class="text-xl font-bold mb-3">💃 Pose Generator</h2>
+      <div class="flex gap-2 overflow-x-auto pb-2">
+        <img src="https://image.pollinations.ai/prompt/standing%20pose%20reference?width=200&height=200" 
+             class="pose-thumb cursor-pointer" onclick="addPose('standing')">
+        <img src="https://image.pollinations.ai/prompt/sitting%20pose%20reference?width=200&height=200" 
+             class="pose-thumb cursor-pointer" onclick="addPose('sitting')">
+        <img src="https://image.pollinations.ai/prompt/fighting%20pose%20reference?width=200&height=200" 
+             class="pose-thumb cursor-pointer" onclick="addPose('fighting')">
+        <img src="https://image.pollinations.ai/prompt/dancing%20pose%20reference?width=200&height=200" 
+             class="pose-thumb cursor-pointer" onclick="addPose('dancing')">
+        <img src="https://image.pollinations.ai/prompt/yoga%20pose%20reference?width=200&height=200" 
+             class="pose-thumb cursor-pointer" onclick="addPose('yoga')">
+      </div>
+    </div>
+
+    <!-- CAMERA SETTING ++ -->
+    <div class="bg-gray-800 p-4 rounded-lg mb-6">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold">📷 Advanced Camera</h2>
+        <button onclick="resetCamera()" class="text-xs bg-gray-700 px-2 py-1 rounded">♻️ Reset</button>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Lens -->
+        <div>
+          <label class="block mb-1 text-sm">🔍 Lens</label>
+          <select id="lens-select" class="w-full bg-gray-700 p-2 rounded text-sm">
+            <option value="16mm">16mm (Ultra Wide)</option>
+            <option value="24mm">24mm (Wide)</option>
+            <option value="50mm">50mm (Standard)</option>
+            <option value="85mm" selected>85mm (Portrait)</option>
+            <option value="135mm">135mm (Tele)</option>
+            <option value="200mm">200mm (Super Tele)</option>
+          </select>
+        </div>
+        
+        <!-- Lighting -->
+        <div>
+          <label class="block mb-1 text-sm">💡 Lighting</label>
+          <select id="lighting-select" class="w-full bg-gray-700 p-2 rounded text-sm">
+            <option value="natural">Natural Light</option>
+            <option value="studio">Studio Softbox</option>
+            <option value="ring">Ring Light</option>
+            <option value="neon">Neon Lights</option>
+            <option value="candle">Candle Light</option>
+            <option value="sunset">Golden Hour</option>
+          </select>
+        </div>
+        
+        <!-- Effects -->
+        <div>
+          <label class="block mb-1 text-sm">✨ Effects</label>
+          <select id="effect-select" class="w-full bg-gray-700 p-2 rounded text-sm">
+            <option value="none">None</option>
+            <option value="bokeh">Bokeh</option>
+            <option value="grain">Film Grain</option>
+            <option value="vignette">Vignette</option>
+            <option value="bloom">Light Bloom</option>
+            <option value="hdr">HDR Effect</option>
+          </select>
+        </div>
+        
+        <!-- Ratio -->
+        <div>
+          <label class="block mb-1 text-sm">📐 Ratio</label>
+          <select id="ratio-select" class="w-full bg-gray-700 p-2 rounded text-sm">
+            <option value="1:1">Square (1:1)</option>
+            <option value="4:5">Portrait (4:5)</option>
+            <option value="9:16">Vertical (9:16)</option>
+            <option value="3:2">Classic (3:2)</option>
+            <option value="16:9">Widescreen (16:9)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STYLE SELECTOR (60+ STYLES) -->
+    <div class="mb-6">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-xl font-bold">🎨 Style Gallery</h2>
+        <div class="flex gap-2">
+          <button onclick="filterStyles('all')" class="text-xs bg-gray-700 px-2 py-1 rounded">All</button>
+          <button onclick="filterStyles('photo')" class="text-xs bg-gray-700 px-2 py-1 rounded">Photo</button>
+          <button onclick="filterStyles('art')" class="text-xs bg-gray-700 px-2 py-1 rounded">Art</button>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3" id="style-grid">
+        <!-- Diisi oleh JavaScript -->
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="flex gap-3 mb-6">
+      <button id="generate-btn" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold">
+        🚀 GENERATE
+      </button>
+      <button onclick="randomizeAll()" class="px-4 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg">
+        🎲 RANDOM
+      </button>
+      <button onclick="shareToInstagram()" class="px-4 py-3 bg-pink-600 hover:bg-pink-700 rounded-lg">
+        📸 SHARE
+      </button>
+    </div>
+
+    <!-- GALLERY -->
+    <h2 class="text-xl font-bold mb-4">🖼️ Results</h2>
+    <div id="gallery" class="grid gap-4 grid-cols-1 sm:grid-cols-2"></div>
+  </div>
+
+  <script>
+    // 60+ STYLES (Kategori: photo, art, special)
+    const ALL_STYLES = {
+      // Photography
+      portrait: {
+        name: "📸 Portrait Pro",
+        prompt: "professional portrait, 85mm lens, f/1.8 aperture",
+        category: "photo",
+        ratio: "4:5"
+      },
+      cinematic: {
+        name: "🎬 Cinematic",
+        prompt: "cinematic lighting, film grain, anamorphic lens flare",
+        category: "photo",
+        ratio: "16:9"
+      },
+      // ... tambahkan 20+ style photography lainnya ...
+
+      // Artistic
+      watercolor: {
+        name: "🎨 Watercolor",
+        prompt: "watercolor painting, visible brush strokes",
+        category: "art",
+        ratio: "3:4"
+      },
+      cyberpunk: {
+        name: "🌃 Cyberpunk",
+        prompt: "neon lights, rainy cyberpunk city",
+        category: "art",
+        ratio: "16:9"
+      },
+      // ... tambahkan 20+ style artistic ...
+
+      // Special Effects
+      glitch: {
+        name: "📟 Glitch Art",
+        prompt: "digital glitch effect, RGB split, corrupted pixels",
+        category: "special",
+        ratio: "16:9"
+      },
+      double_exposure: {
+        name: "👻 Double Expo",
+        prompt: "double exposure portrait with nature elements",
+        category: "special",
+        ratio: "2:3"
+      }
+      // ... tambahkan 20+ special effects ...
+    };
+
+    // POSE LIBRARY
+    const POSES = {
+      standing: "standing straight, confident posture",
+      sitting: "sitting cross-legged, relaxed pose",
+      fighting: "dynamic fighting stance, action pose",
+      dancing: "dancing pose, flowing movement",
+      yoga: "yoga pose, balanced and graceful"
+    };
+
+    // STATE
+    let currentStyle = null;
+    let currentPose = null;
+
+    // INIT
+    document.addEventListener('DOMContentLoaded', () => {
+      renderStyles();
+      updatePreview();
+    });
+
+    // RENDER STYLES
+    function renderStyles(category = 'all') {
+      const container = document.getElementById('style-grid');
+      container.innerHTML = '';
+      
+      Object.entries(ALL_STYLES).forEach(([id, style]) => {
+        if (category === 'all' || style.category === category) {
+          container.innerHTML += `
+            <div onclick="selectStyle('${id}')" 
+                 class="style-card p-3 rounded-lg border ${currentStyle === id ? 'border-blue-500 bg-gray-800' : 'border-gray-700 bg-gray-800'} cursor-pointer">
+              <div class="font-bold text-sm">${style.name}</div>
+              <div class="text-xs text-gray-400 mt-1 truncate">${style.prompt}</div>
+            </div>
+          `;
         }
-    </script>
+      });
+    }
+
+    // FILTER STYLES
+    function filterStyles(category) {
+      renderStyles(category);
+    }
+
+    // SELECT STYLE
+    function selectStyle(styleId) {
+      currentStyle = styleId;
+      document.querySelectorAll('.style-card').forEach(el => {
+        el.classList.remove('border-blue-500', 'bg-gray-800');
+      });
+      document.querySelector(`[onclick="selectStyle('${styleId}')"]`).classList.add('border-blue-500', 'bg-gray-800');
+      updatePreview();
+    }
+
+    // ADD POSE
+    function addPose(poseKey) {
+      currentPose = poseKey;
+      const promptInput = document.getElementById('prompt-input');
+      promptInput.value = promptInput.value + `, ${POSES[poseKey]}`;
+      updatePreview();
+    }
+
+    // GENERATE IMAGE
+    function generateImage() {
+      const prompt = generatePrompt();
+      if (!prompt) return;
+      
+      const ratio = document.getElementById('ratio-select').value;
+      const [w, h] = ratio.split(':').map(Number);
+      const width = w * 256;
+      const height = h * 256;
+      
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = `
+        <div class="relative group">
+          <img src="https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${width}&height=${height}&nologo=true" 
+               class="w-full h-auto rounded-lg border border-gray-700" loading="lazy">
+          <div class="watermark">Tboyo</div>
+          <div class="absolute bottom-3 right-3 bg-black/70 px-2 py-1 rounded text-xs">
+            ${currentStyle ? ALL_STYLES[currentStyle].name : 'No style'}
+          </div>
+          <button onclick="shareToInstagram(this.previousElementSibling.src)" 
+                  class="absolute top-3 right-3 bg-black/70 p-2 rounded-full opacity-0 group-hover:opacity-100">
+            📸
+          </button>
+        </div>
+      ` + gallery.innerHTML;
+    }
+
+    // SHARE TO INSTAGRAM
+    function shareToInstagram(imageUrl = null) {
+      if (!imageUrl) {
+        const lastImage = document.querySelector('#gallery img');
+        if (lastImage) imageUrl = lastImage.src;
+      }
+      
+      if (imageUrl) {
+        // Simulasikan share (di mobile akan buka native share dialog)
+        if (navigator.share) {
+          navigator.share({
+            title: 'Check out my AI art!',
+            url: imageUrl
+          }).catch(console.error);
+        } else {
+          // Fallback untuk desktop
+          prompt("Copy this link to share:", imageUrl);
+        }
+      } else {
+        alert("Generate an image first!");
+      }
+    }
+
+    // RANDOMIZE ALL
+    function randomizeAll() {
+      // Random style
+      const styles = Object.keys(ALL_STYLES);
+      selectStyle(styles[Math.floor(Math.random() * styles.length)]);
+      
+      // Random camera
+      document.getElementById('lens-select').selectedIndex = Math.floor(Math.random() * 6);
+      document.getElementById('lighting-select').selectedIndex = Math.floor(Math.random() * 6);
+      document.getElementById('effect-select').selectedIndex = Math.floor(Math.random() * 6);
+      document.getElementById('ratio-select').selectedIndex = Math.floor(Math.random() * 5);
+      
+      // Random pose
+      const poses = Object.keys(POSES);
+      currentPose = poses[Math.floor(Math.random() * poses.length)];
+      document.getElementById('prompt-input').value = `portrait of person, ${POSES[currentPose]}`;
+      
+      updatePreview();
+    }
+
+    // RESET CAMERA
+    function resetCamera() {
+      document.getElementById('lens-select').value = "85mm";
+      document.getElementById('lighting-select').value = "natural";
+      document.getElementById('effect-select').value = "none";
+      document.getElementById('ratio-select').value = "4:5";
+      updatePreview();
+    }
+
+    // GENERATE PROMPT
+    function generatePrompt(forPreview = false) {
+      let prompt = document.getElementById('prompt-input').value;
+      if (!prompt && !forPreview) {
+        alert("Please enter a prompt first!");
+        return null;
+      }
+      
+      if (forPreview) prompt = prompt || "portrait of person";
+      
+      // Add pose
+      if (currentPose) prompt += `, ${POSES[currentPose]}`;
+      
+      // Add camera settings
+      prompt += `, ${document.getElementById('lens-select').value} lens`;
+      prompt += `, ${document.getElementById('lighting-select').value} lighting`;
+      
+      const effect = document.getElementById('effect-select').value;
+      if (effect !== 'none') prompt += `, ${effect} effect`;
+      
+      // Add style
+      if (currentStyle && ALL_STYLES[currentStyle]) {
+        prompt += `, ${ALL_STYLES[currentStyle].prompt}`;
+      }
+      
+      return prompt + ", 8K UHD, professional";
+    }
+
+    // UPDATE PREVIEW
+    function updatePreview() {
+      const prompt = generatePrompt(true);
+      const preview = document.getElementById('camera-preview');
+      
+      if (prompt) {
+        const ratio = document.getElementById('ratio-select').value;
+        const [w, h] = ratio.split(':').map(Number);
+        preview.style.backgroundImage = `url('https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w*150}&height=${h*150}&nologo=true')`;
+        preview.innerHTML = '';
+      }
+    }
+  </script>
 </body>
-                </html>
+    </html>
