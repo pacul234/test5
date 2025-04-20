@@ -19,6 +19,31 @@
       object-fit: cover;
       border-radius: 8px;
     }
+    /* Animasi Baru */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .loading-spinner {
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #camera-preview {
+      background-size: cover;
+      background-position: center;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white">
@@ -132,8 +157,9 @@
 
     <!-- ACTION BUTTONS -->
     <div class="flex gap-3 mb-6">
-      <button id="generate-btn" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold">
-        🚀 GENERATE
+      <button id="generate-btn" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-bold flex items-center justify-center">
+        <span id="generate-text">🚀 GENERATE</span>
+        <span id="loading-spinner" class="loading-spinner ml-2">🌀</span>
       </button>
       <button onclick="randomizeAll()" class="px-4 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg">
         🎲 RANDOM
@@ -141,6 +167,11 @@
       <button onclick="shareToInstagram()" class="px-4 py-3 bg-pink-600 hover:bg-pink-700 rounded-lg">
         📸 SHARE
       </button>
+    </div>
+
+    <!-- PREVIEW AREA -->
+    <div id="camera-preview" class="rounded-lg mb-6 border border-gray-700">
+      <p class="text-center">Preview will appear here after settings</p>
     </div>
 
     <!-- GALLERY -->
@@ -164,8 +195,6 @@
         category: "photo",
         ratio: "16:9"
       },
-      // ... tambahkan 20+ style photography lainnya ...
-
       // Artistic
       watercolor: {
         name: "🎨 Watercolor",
@@ -179,22 +208,13 @@
         category: "art",
         ratio: "16:9"
       },
-      // ... tambahkan 20+ style artistic ...
-
       // Special Effects
       glitch: {
         name: "📟 Glitch Art",
         prompt: "digital glitch effect, RGB split, corrupted pixels",
         category: "special",
         ratio: "16:9"
-      },
-      double_exposure: {
-        name: "👻 Double Expo",
-        prompt: "double exposure portrait with nature elements",
-        category: "special",
-        ratio: "2:3"
       }
-      // ... tambahkan 20+ special effects ...
     };
 
     // POSE LIBRARY
@@ -213,7 +233,7 @@
     // INIT
     document.addEventListener('DOMContentLoaded', () => {
       renderStyles();
-      updatePreview();
+      setupEventListeners();
     });
 
     // RENDER STYLES
@@ -234,12 +254,92 @@
       });
     }
 
-    // FILTER STYLES
-    function filterStyles(category) {
-      renderStyles(category);
+    // EVENT LISTENERS
+    function setupEventListeners() {
+      document.getElementById('generate-btn').addEventListener('click', generateImage);
+      
+      // Update preview saat setting berubah
+      document.querySelectorAll('#lens-select, #lighting-select, #effect-select, #ratio-select').forEach(el => {
+        el.addEventListener('change', updatePreview);
+      });
     }
 
-    // SELECT STYLE
+    // GENERATE IMAGE (DENGAN ANIMASI LOADING)
+    async function generateImage() {
+      const prompt = generatePrompt();
+      if (!prompt) return;
+      
+      // Tampilkan loading
+      const generateBtn = document.getElementById('generate-btn');
+      const generateText = document.getElementById('generate-text');
+      const spinner = document.getElementById('loading-spinner');
+      
+      generateText.textContent = "GENERATING...";
+      spinner.style.display = 'inline-block';
+      generateBtn.disabled = true;
+      
+      try {
+        const ratio = document.getElementById('ratio-select').value;
+        const [w, h] = ratio.split(':').map(Number);
+        const width = w * 256;
+        const height = h * 256;
+        
+        const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${width}&height=${height}&nologo=true`;
+        
+        // Buat elemen gambar
+        const gallery = document.getElementById('gallery');
+        const imgWrapper = document.createElement('div');
+        imgWrapper.className = 'relative fade-in';
+        
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.alt = 'Generated Image';
+        img.className = 'w-full h-auto rounded-lg border border-gray-700';
+        img.loading = 'lazy';
+        
+        // Watermark
+        const watermark = document.createElement('div');
+        watermark.className = 'watermark';
+        watermark.textContent = 'Tboyo';
+        
+        // Info style
+        const infoBadge = document.createElement('div');
+        infoBadge.className = 'absolute bottom-3 right-3 bg-black/70 px-2 py-1 rounded text-xs';
+        infoBadge.textContent = currentStyle ? ALL_STYLES[currentStyle].name : 'Custom';
+        
+        // Share button
+        const shareBtn = document.createElement('button');
+        shareBtn.className = 'absolute top-3 right-3 bg-black/70 p-2 rounded-full opacity-0 hover:opacity-100 transition-opacity';
+        shareBtn.innerHTML = '📸';
+        shareBtn.onclick = () => shareToInstagram(img.src);
+        
+        imgWrapper.appendChild(img);
+        imgWrapper.appendChild(watermark);
+        imgWrapper.appendChild(infoBadge);
+        imgWrapper.appendChild(shareBtn);
+        
+        // Tunggu gambar load
+        await new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+        
+        gallery.prepend(imgWrapper);
+        
+      } catch (error) {
+        console.error("Generate error:", error);
+        alert("Failed to generate image. Please try again!");
+      } finally {
+        // Reset loading state
+        generateText.textContent = "🚀 GENERATE";
+        spinner.style.display = 'none';
+        generateBtn.disabled = false;
+      }
+    }
+
+    // ... (Fungsi lainnya tetap sama seperti sebelumnya)
+    function filterStyles(category) { renderStyles(category); }
+
     function selectStyle(styleId) {
       currentStyle = styleId;
       document.querySelectorAll('.style-card').forEach(el => {
@@ -249,7 +349,6 @@
       updatePreview();
     }
 
-    // ADD POSE
     function addPose(poseKey) {
       currentPose = poseKey;
       const promptInput = document.getElementById('prompt-input');
@@ -257,34 +356,6 @@
       updatePreview();
     }
 
-    // GENERATE IMAGE
-    function generateImage() {
-      const prompt = generatePrompt();
-      if (!prompt) return;
-      
-      const ratio = document.getElementById('ratio-select').value;
-      const [w, h] = ratio.split(':').map(Number);
-      const width = w * 256;
-      const height = h * 256;
-      
-      const gallery = document.getElementById('gallery');
-      gallery.innerHTML = `
-        <div class="relative group">
-          <img src="https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${width}&height=${height}&nologo=true" 
-               class="w-full h-auto rounded-lg border border-gray-700" loading="lazy">
-          <div class="watermark">Tboyo</div>
-          <div class="absolute bottom-3 right-3 bg-black/70 px-2 py-1 rounded text-xs">
-            ${currentStyle ? ALL_STYLES[currentStyle].name : 'No style'}
-          </div>
-          <button onclick="shareToInstagram(this.previousElementSibling.src)" 
-                  class="absolute top-3 right-3 bg-black/70 p-2 rounded-full opacity-0 group-hover:opacity-100">
-            📸
-          </button>
-        </div>
-      ` + gallery.innerHTML;
-    }
-
-    // SHARE TO INSTAGRAM
     function shareToInstagram(imageUrl = null) {
       if (!imageUrl) {
         const lastImage = document.querySelector('#gallery img');
@@ -292,14 +363,12 @@
       }
       
       if (imageUrl) {
-        // Simulasikan share (di mobile akan buka native share dialog)
         if (navigator.share) {
           navigator.share({
             title: 'Check out my AI art!',
             url: imageUrl
           }).catch(console.error);
         } else {
-          // Fallback untuk desktop
           prompt("Copy this link to share:", imageUrl);
         }
       } else {
@@ -307,19 +376,15 @@
       }
     }
 
-    // RANDOMIZE ALL
     function randomizeAll() {
-      // Random style
       const styles = Object.keys(ALL_STYLES);
       selectStyle(styles[Math.floor(Math.random() * styles.length)]);
       
-      // Random camera
       document.getElementById('lens-select').selectedIndex = Math.floor(Math.random() * 6);
       document.getElementById('lighting-select').selectedIndex = Math.floor(Math.random() * 6);
       document.getElementById('effect-select').selectedIndex = Math.floor(Math.random() * 6);
       document.getElementById('ratio-select').selectedIndex = Math.floor(Math.random() * 5);
       
-      // Random pose
       const poses = Object.keys(POSES);
       currentPose = poses[Math.floor(Math.random() * poses.length)];
       document.getElementById('prompt-input').value = `portrait of person, ${POSES[currentPose]}`;
@@ -327,7 +392,6 @@
       updatePreview();
     }
 
-    // RESET CAMERA
     function resetCamera() {
       document.getElementById('lens-select').value = "85mm";
       document.getElementById('lighting-select').value = "natural";
@@ -336,7 +400,6 @@
       updatePreview();
     }
 
-    // GENERATE PROMPT
     function generatePrompt(forPreview = false) {
       let prompt = document.getElementById('prompt-input').value;
       if (!prompt && !forPreview) {
@@ -345,18 +408,14 @@
       }
       
       if (forPreview) prompt = prompt || "portrait of person";
-      
-      // Add pose
       if (currentPose) prompt += `, ${POSES[currentPose]}`;
       
-      // Add camera settings
       prompt += `, ${document.getElementById('lens-select').value} lens`;
       prompt += `, ${document.getElementById('lighting-select').value} lighting`;
       
       const effect = document.getElementById('effect-select').value;
       if (effect !== 'none') prompt += `, ${effect} effect`;
       
-      // Add style
       if (currentStyle && ALL_STYLES[currentStyle]) {
         prompt += `, ${ALL_STYLES[currentStyle].prompt}`;
       }
@@ -364,7 +423,6 @@
       return prompt + ", 8K UHD, professional";
     }
 
-    // UPDATE PREVIEW
     function updatePreview() {
       const prompt = generatePrompt(true);
       const preview = document.getElementById('camera-preview');
@@ -374,8 +432,11 @@
         const [w, h] = ratio.split(':').map(Number);
         preview.style.backgroundImage = `url('https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=${w*150}&height=${h*150}&nologo=true')`;
         preview.innerHTML = '';
+      } else {
+        preview.style.backgroundImage = '';
+        preview.innerHTML = '<p class="text-center">Preview will appear here after settings</p>';
       }
     }
   </script>
 </body>
-    </html>
+            </html>
